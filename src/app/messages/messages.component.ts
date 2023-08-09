@@ -1,11 +1,27 @@
 import { Component } from '@angular/core';
-import { MessageService } from '../message.service';
+import { MessageService } from '../services/message.service';
+import { BehaviorSubject } from 'rxjs';
+import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-messages',
-  templateUrl: './messages.component.html',
-  styleUrls: ['./messages.component.css']
+    selector: 'app-messages',
+    templateUrl: './messages.component.html',
+    styleUrls: ['./messages.component.css'],
+    standalone: true,
+    imports: [NgFor],
 })
 export class MessagesComponent {
-constructor(public messageService: MessageService){}
+  private messages: BehaviorSubject<string[]>;
+
+  constructor(private messageService: MessageService) {
+    this.messages = this.messageService.messages;
+  }
+
+  getMessages(): string[] {
+    return this.messages.value;
+  }
+
+  clearMessages() {
+    this.messages.next([]);
+  }
 }

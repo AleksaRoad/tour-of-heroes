@@ -1,14 +1,21 @@
 import { Component, Input } from '@angular/core';
-import { Hero } from '../hero';
+import { Hero } from '../models/hero';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { Location, NgIf, UpperCasePipe } from '@angular/common';
 
-import { HeroService } from '../hero.service';
+import { HeroService } from '../services/hero.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-hero-detail',
-  templateUrl: './hero-detail.component.html',
-  styleUrls: ['./hero-detail.component.css'],
+    selector: 'app-hero-detail',
+    templateUrl: './hero-detail.component.html',
+    styleUrls: ['./hero-detail.component.css'],
+    standalone: true,
+    imports: [
+        NgIf,
+        FormsModule,
+        UpperCasePipe,
+    ],
 })
 export class HeroDetailComponent {
   constructor(
