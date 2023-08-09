@@ -1,21 +1,17 @@
 import { Component, Input } from '@angular/core';
-import { Hero } from '../models/hero';
+import { Hero } from '../core/models/hero';
 import { ActivatedRoute } from '@angular/router';
 import { Location, NgIf, UpperCasePipe } from '@angular/common';
 
-import { HeroService } from '../services/hero.service';
+import { HeroService } from '../core/services/hero/hero.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-    selector: 'app-hero-detail',
-    templateUrl: './hero-detail.component.html',
-    styleUrls: ['./hero-detail.component.css'],
-    standalone: true,
-    imports: [
-        NgIf,
-        FormsModule,
-        UpperCasePipe,
-    ],
+  selector: 'app-hero-detail',
+  templateUrl: './hero-detail.component.html',
+  styleUrls: ['./hero-detail.component.css'],
+  standalone: true,
+  imports: [NgIf, FormsModule, UpperCasePipe],
 })
 export class HeroDetailComponent {
   constructor(
@@ -26,10 +22,6 @@ export class HeroDetailComponent {
   @Input() hero?: Hero;
 
   ngOnInit(): void {
-    this.getHero();
-  }
-
-  getHero(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.heroService.getHero(id).subscribe((hero) => (this.hero = hero));
   }
